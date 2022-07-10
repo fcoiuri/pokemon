@@ -1,6 +1,4 @@
 import React from "react";
-import { api } from "../../_utils/api";
-import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
@@ -19,25 +17,9 @@ export const PokeCard: React.FC<PokeCardProps> = ({ name, image, id }) => {
   const styles = useStyles();
   const navigate = useNavigate();
 
-  // const showPokemons = api().then((poke) =>
-  //   poke.slice(0, 20).map((data: any) => {
-  //     setName(data.forms.name);
-  //   })
-  // );
-
-  //   api().then((data) => setImage(data.sprites["front_default"]));
-
   return (
     <React.Fragment>
-      <Card
-        raised
-        // sx={{
-        //   maxWidth: 280,
-        //   margin: "0 auto",
-        //   padding: "0.1em",
-        // }}
-        className={styles.card}
-      >
+      <Card raised className={styles.card}>
         <CardActionArea
           className={styles.cardClick}
           onClick={() => navigate(`/pokemon/${id}`)}
@@ -50,11 +32,6 @@ export const PokeCard: React.FC<PokeCardProps> = ({ name, image, id }) => {
                 image={image}
                 className={styles.image}
                 sx={{ objectFit: "contain" }}
-                // style={{
-                //   width: "auto",
-                //   // marginRight: '100px',
-                //   // maxHeight: "200px",
-                // }}
               />
             </Grid>
             <Grid
@@ -66,10 +43,7 @@ export const PokeCard: React.FC<PokeCardProps> = ({ name, image, id }) => {
               alignItems="center"
             >
               <CardContent>
-                <Typography
-                  variant="subtitle1"
-                  component="div"
-                >
+                <Typography variant="subtitle1" component="div">
                   {name}
                 </Typography>
               </CardContent>

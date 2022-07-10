@@ -1,21 +1,11 @@
 import React from "react";
-import { api, apiPerRegion } from "../../_utils/api";
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+import { apiPerRegion } from "../../_utils/api";
 import { PokeCard } from "../PokeCard";
 import { Grid } from "@mui/material";
 import { useStyles } from "./Pokemons.style";
 import { useLocation } from "react-router";
 
-interface PokemonsProps {
-  data?: any;
-  // data?: Array<Object>;
-}
-export const Pokemons: React.FC<PokemonsProps> = ({ data }) => {
+export const Pokemons: React.FC = () => {
   const styles = useStyles();
   const { state } = useLocation();
   const [listPokemons, setListPokemons] = React.useState<any>([]);
@@ -52,8 +42,6 @@ export const Pokemons: React.FC<PokemonsProps> = ({ data }) => {
   return (
     <Grid container spacing={2}>
       {showPokemons}
-      {/* {showPokemons} */}
-      {/* <img src={image} alt="Pokemon" />; */}
     </Grid>
   );
 };

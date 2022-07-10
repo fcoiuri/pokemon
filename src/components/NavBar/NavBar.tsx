@@ -67,7 +67,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export const AppBaar = () => {
+export const NavBar: React.FC = () => {
   const styles = useStyles();
   const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -80,17 +80,6 @@ export const AppBaar = () => {
     apiPerRegion(region).then((data) => setListPokemons(data));
   }, [region]);
 
-  //   const showPokemons = listPokemons.map((d: any) => {
-  //     return (
-  //       <PokeCard
-  //         name={d.name}
-  //         key={d.name}
-  //         image={`https://img.pokemondb.net/artwork/large/${d.name}.jpg`}
-  //         id={d.name + 1}
-  //       />
-  //     );
-  //   });
-
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setRegion(regions.indexOf(event.currentTarget.innerText));
     // handleCloseNavMenu();
@@ -100,87 +89,80 @@ export const AppBaar = () => {
     setAnchorElNav(event.currentTarget);
   };
 
-   React.useMemo(() => {
+  React.useMemo(() => {
     navigate("/", { state: listPokemons });
-  },[listPokemons, navigate]);
+  }, [listPokemons, navigate]);
 
   return (
-    <>
-      <AppBar position="static" className={styles.navbar}>
-        <Container maxWidth="xl">
-          <Toolbar disableGutters>
-            <Box sx={{ display: { xs: "none", md: "flex" }, mr: 3 }}>
+    <AppBar position="static" className={styles.navbar}>
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
+          <Box sx={{ display: { xs: "none", md: "flex" }, mr: 3 }}>
+            <img src={pokemonLogo} alt="Pokemon logo" className={styles.logo} />
+          </Box>
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+            <IconButton
+              size="large"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="inherit"
+            >
+              <MenuIcon />
               <img
                 src={pokemonLogo}
                 alt="Pokemon logo"
                 className={styles.logo}
               />
-            </Box>
-            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
-                color="inherit"
-              >
-                <MenuIcon />
-                <img
-                  src={pokemonLogo}
-                  alt="Pokemon logo"
-                  className={styles.logo}
-                />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorElNav}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "left",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "left",
-                }}
-                open={Boolean(anchorElNav)}
-                // onClose={handleCloseNavMenu}
-                sx={{
-                  display: { xs: "block", md: "none" },
-                }}
-              >
-                {regions.map((region, index) => (
-                  <MenuItem key={index} onClick={handleClick}>
-                    <Typography textAlign="center">{region}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
-            </Box>
-            <Search>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase
-                placeholder="Search…"
-                inputProps={{ "aria-label": "search" }}
-              />
-            </Search>
-            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "left",
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "left",
+              }}
+              open={Boolean(anchorElNav)}
+              // onClose={handleCloseNavMenu}
+              sx={{
+                display: { xs: "block", md: "none" },
+              }}
+            >
               {regions.map((region, index) => (
-                <Button
-                  key={index}
-                  onClick={handleClick}
-                  sx={{ my: 2, mx: 1, color: "white", display: "block" }}
-                >
-                  <Typography>{region}</Typography>
-                </Button>
+                <MenuItem key={index} onClick={handleClick}>
+                  <Typography textAlign="center">{region}</Typography>
+                </MenuItem>
               ))}
-            </Box>
-          </Toolbar>
-        </Container>
-      </AppBar>
-      {/* {showPokemons} */}
-    </>
+            </Menu>
+          </Box>
+          <Search>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Search…"
+              inputProps={{ "aria-label": "search" }}
+            />
+          </Search>
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+            {regions.map((region, index) => (
+              <Button
+                key={index}
+                onClick={handleClick}
+                sx={{ my: 2, mx: 1, color: "white", display: "block" }}
+              >
+                <Typography>{region}</Typography>
+              </Button>
+            ))}
+          </Box>
+        </Toolbar>
+      </Container>
+    </AppBar>
   );
 };
